@@ -1,0 +1,12 @@
+.taskitem{
+  margin-left: 20px;
+}
+
+.task-list{
+  margin-top: 20px;
+}
+
+.task-done{
+  text-decoration: line-through;
+  color: #999;
+}
