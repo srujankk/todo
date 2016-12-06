@@ -7,4 +7,4 @@ This uses basic script tags to load the library files and templates. I have inte
 + This is a basic Marionette App with Mariontte View, Collection View, Backbone Model and Collection.
 + This App displays basic routing using Backbone Router.
 + Uses only script tags to load external libraries and templates for marionette views.
-+ Does not use any Regions/View.
++ Does not use any Regions.
