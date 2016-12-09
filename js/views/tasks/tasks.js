@@ -15,5 +15,17 @@ Mapp.Tasks = Marionette.View.extend({
     });
     tasklist.render();
     this.$el.find('#taskList').html(tasklist.$el);
+
+    var filters = [
+      {'filterTitle':'All','status':'all'},
+      {'filterTitle':'Pending','status':false,'selected':true},
+      {'filterTitle':'Completed','status':true}
+    ];
+    var filterCollection = new Mapp.TaskFilterCollection(filters);
+    var filterView = new Mapp.FilterTask({
+      collection:filterCollection
+    });
+    filterView.render();
+    this.$el.find("#taskFilter").html(filterView.$el);
   }
 });
