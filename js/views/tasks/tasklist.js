@@ -4,9 +4,9 @@ Mapp.TaskList = Marionette.CollectionView.extend({
   className:'list-group task-list',
   initialize:function(){
     console.log('TaskList');
-    this.listenTo(Mapp, 'ADD_ITEM', this.addItem);
+    this.listenTo(Mapp, 'ADD_ITEM', this.addItem);  
   },
   addItem: function(t){
-    this.collection.add(t);
+    this.collection.addTask(t);
   }
 });
