@@ -8,7 +8,8 @@ Mapp.TasksCollection = Backbone.Collection.extend({
   model: Mapp.TaskModel,
   initialize: function(options){
     this.org = options || [];
-    this.listenTo(Mapp,'FILTER', this.filterTask);
+      this.listenTo(Mapp, 'ADD_ITEM', this.addTask);
+      this.listenTo(Mapp,'FILTER', this.filterTask);
     this.listenTo(Mapp,'TASK_UPDATE', this.updateTask);
   },
   isUnique: function(t){
