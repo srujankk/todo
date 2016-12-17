@@ -9,12 +9,9 @@ Mapp.Tasks = Marionette.View.extend({
     console.log('rendering addTask');
     this.$el.find('#addtask').html(addTask.$el);
 
-    var task_json = [
-      {'task':'Default 1','done':true},
-      {'task':'Default 2'}
-    ]
-
-    var tasks = new Mapp.TasksCollection(task_json);
+      var alltasks = new Mapp.TasksCollection();
+      var tasks = new Mapp.FilteredTasksCollection();
+      alltasks.fetch();
     var tasklist = new Mapp.TaskList({
       collection: tasks
     });
@@ -28,7 +25,7 @@ Mapp.Tasks = Marionette.View.extend({
     ];
     var filterCollection = new Mapp.TaskFilterCollection(filters);
     var filterView = new Mapp.FilterTask({
-      collection:filterCollection
+      collection:filterCollection,
     });
     filterView.render();
     this.$el.find("#taskFilter").html(filterView.$el);
