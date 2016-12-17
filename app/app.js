@@ -26,24 +26,12 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Cross Origin Policy
  */
 app.use(function(req,res,next){
-<<<<<<< HEAD
     res.header('Access-Control-Allow-Origin','*');
     res.header('Access-Control-Allow-Credentials','true');
     res.header('Access-Control-Allow-Methods','*');
     res.header('Access-Control-Allow-Headers','Content-Type,Authorization');
     next();
 });
-
-=======
-   res.header('Access-Control-Allow-Origin','*');
-   res.header('Access-Control-Allow-Credentials','true');
-   res.header('Access-Control-Allow-Methods','*');
-   res.header('Access-Control-Allow-Headers','Content-Type,Authorization');
-   next();
-});
-
-
->>>>>>> b0a5d12d9d992f05cd95da55b448d5195767f0d4
 app.use('/', routes);
 app.use('/tasks', tasks);
 
