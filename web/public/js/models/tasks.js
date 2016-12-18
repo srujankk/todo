@@ -13,25 +13,13 @@ Mapp.FilteredTasksCollection = Backbone.Collection.extend({
     },
     filterTask:function(c,m){
         this.filterState = m?m.get('status'):this.filterState;
-        var filteredSet,
-            col = c.toJSON();
 
-        switch(this.filterState){
-            case 'all':
-                filteredSet = col;
-                break;
-            case true:
-                filteredSet = _.filter(col, function(m){
-                    return m.done;
-                });
-                break;
-            case false:
-                filteredSet = _.filter(col,function(m){
-                    return !m.done;
-                });
-                break;
+        if(this.filterState === 'all'){
+            this.reset(c.toJSON())
         }
-        this.reset(filteredSet);
+        else{
+            this.reset(c.where({'done':this.filterState}));
+        }
     }
 })
 
@@ -55,9 +43,6 @@ Mapp.TasksCollection = Backbone.Collection.extend({
       this.add(t);
   },
   updateTask:function(m){
-     //var taskToUpdate = this.findWhere({'_id':m.get('_id')});
-    //taskToUpdate.set('done', m.get('done'));
-    //this.set(taskToUpdate,{remove:false});
       this.fetch();
   },
   filterTask: function(m){
