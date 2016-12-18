@@ -1,37 +1,9 @@
-/*
-
- OriginalCollection
- TaskCollection
-
- tasks has instances of both Collections
-
- OriginalCollection makes a fetch call
- OriginalCollection triggers tasks_updated event
- taskCollection listens to the event tasks_updated
- taskCollection gets the selected filter option and filters
- taskCollection then resets itself with filtered collection
-
- OriginalCollection listens to ADD_TASK event
- OriginalCollections adds the model from the event
- OriginalCollection triggers tasks_updated event
- taskCollection listens to the event tasks_updated
- taskCollection gets the selected filter option and filters
- taskCollection then resets itself with filtered collection
-
- OriginalCollection listens to TASK_STATUS_CHANGE
- OriginalCollection updates the status change to the appropriate model
- OriginalCollection triggers tasks_updated event
- taskCollection listens to the event tasks_updated
- taskCollection gets the selected filter option and filters
- taskCollection then resets itself with filtered collection
-
- */
-
-
 Mapp.TaskModel = Backbone.Model.extend({
   defaults:{
     'done':false
-  }
+  },
+    idAttribute:'_id',
+    urlRoot: "http://localhost:3333/tasks"
 });
 
 Mapp.FilteredTasksCollection = Backbone.Collection.extend({
@@ -65,9 +37,8 @@ Mapp.FilteredTasksCollection = Backbone.Collection.extend({
 
 Mapp.TasksCollection = Backbone.Collection.extend({
   model: Mapp.TaskModel,
-    url:"http://localhost:3000/tasks",
+    url:"http://localhost:3333/tasks",
   initialize: function(options){
-      this.org = options || [];
       this.listenTo(this,'sync', this.updateOrg);
       this.listenTo(Mapp, 'ADD_ITEM', this.addTask);
       this.listenTo(Mapp,'FILTER', this.filterTask);
@@ -81,17 +52,13 @@ Mapp.TasksCollection = Backbone.Collection.extend({
     return _.findWhere(this.toJSON(),t)?false:true;
   },
   addTask: function(t){
-    if(!this.isUnique(t)){
-      return;
-    }
-    this.add(t);
-    Mapp.trigger('UPDATE_FILTERED_TASKS',this);
+      this.add(t);
   },
   updateTask:function(m){
-     var taskToUpdate = this.findWhere({'task':m.get('task')});
-    taskToUpdate.set('done', !m.get('done'));
-    this.set(taskToUpdate,{remove:false});
-      Mapp.trigger('UPDATE_FILTERED_TASKS',this);
+     //var taskToUpdate = this.findWhere({'_id':m.get('_id')});
+    //taskToUpdate.set('done', m.get('done'));
+    //this.set(taskToUpdate,{remove:false});
+      this.fetch();
   },
   filterTask: function(m){
       Mapp.trigger('UPDATE_FILTERED_TASKS',this,m);

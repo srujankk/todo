@@ -1,19 +1,57 @@
 var express = require('express');
 var router = express.Router();
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  var tasks_json = [
-      {'task':'Default 1:from server','done':'true'},
-      {'task':'Default 2:from server'}
-  ];
-  res.json(tasks_json);
+  MongoClient.connect('mongodb://localhost:27017/todo',function(err,db){
+      if(err){
+          return next(err);
+      }
+      db.collection('tasks').find().toArray(function(err, results){
+          if(err){
+              console.log(err);
+              return next(err);
+          }
+          //console.log(results);
+          res.json(results);
+      })
+  });
+
 });
 /* GET users listing. */
 router.post('/', function(req, res, next) {
     var c = req.body;
-    console.log(c);
-    res.send('collection added');
+    MongoClient.connect('mongodb://localhost:27017/todo',function(err,db){
+        if(err){
+            return next(err);
+        }
+        var tasks = db.collection('tasks');
+        tasks.insertOne(c,function(err,results){
+            //console.log(results);
+            res.json(results);
+        })
+    });
+});
+
+router.put('/:id', function(req, res, next) {
+    var c = req.body;
+    MongoClient.connect('mongodb://localhost:27017/todo',function(err,db){
+        if(err){
+            return next(err);
+        }
+        var tasks = db.collection('tasks');
+        console.log(req.params.id);
+        tasks.updateOne({_id:new mongodb.ObjectID(req.params.id)},{$set:{done:c.done}},function(err,result){
+            if(err){
+                return next(err);
+            }
+            //console.log(result);
+            res.json(c);
+        })
+    });
 });
 
 module.exports = router;

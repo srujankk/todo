@@ -19,8 +19,18 @@ Mapp.TaskItem = Marionette.View.extend({
     taskStatus ? this.ui.taskitem.addClass('task-done'): this.ui.taskitem.removeClass('task-done');
   },
   taskSelected: function(){
-    //var status = this.model.get('done');
-    //this.model.set('done', !status);
-    Mapp.trigger('TASK_UPDATE', this.model);
+    var status = this.model.get('done');
+    this.model.set('done', !status);
+      this.model.save(null,{
+        success:function(d){
+          console.log(d);
+            Mapp.trigger('TASK_UPDATE', this.model);
+        },
+          error:function(e){
+            console.log(e);
+          },
+          context:this
+      });
+
   }
 });
