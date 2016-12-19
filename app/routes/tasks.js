@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
+var dbConn = require('../config').dbConn;
 
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  MongoClient.connect('mongodb://localhost:27017/todo',function(err,db){
+  MongoClient.connect(dbConn,function(err,db){
       if(err){
           return next(err);
       }
@@ -24,7 +25,7 @@ router.get('/', function(req, res, next) {
 /* GET users listing. */
 router.post('/', function(req, res, next) {
     var c = req.body;
-    MongoClient.connect('mongodb://localhost:27017/todo',function(err,db){
+    MongoClient.connect(dbConn,function(err,db){
         if(err){
             return next(err);
         }
@@ -38,7 +39,7 @@ router.post('/', function(req, res, next) {
 
 router.put('/:id', function(req, res, next) {
     var c = req.body;
-    MongoClient.connect('mongodb://localhost:27017/todo',function(err,db){
+    MongoClient.connect(dbConn,function(err,db){
         if(err){
             return next(err);
         }
@@ -55,7 +56,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.delete('/:id', function(req,res,next){
-    MongoClient.connect('mongodb://localhost:27017/todo',function(err,db){
+    MongoClient.connect(dbConn,function(err,db){
         if(err){
             return next(err);
         }

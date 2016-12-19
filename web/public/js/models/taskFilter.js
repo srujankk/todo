@@ -5,5 +5,12 @@ Mapp.TaskFilterModel = Backbone.Model.extend({
 });
 
 Mapp.TaskFilterCollection = Backbone.Collection.extend({
-  model: Mapp.TaskFilterModel
+  model: Mapp.TaskFilterModel,
+  initialize:function(){
+    console.log('initialize');
+    this.listenTo(Mapp,'FILTER', this.filterTask);
+  },
+  filterTask: function(){
+    console.log('filter');
+  }
 })
