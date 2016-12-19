@@ -2,7 +2,8 @@ Mapp.TaskItem = Marionette.View.extend({
   template:'#taskItemTemplate',
   tagName:'li',
   events:{
-    'click .taskcheck': 'taskSelected'
+    'click .taskcheck': 'taskSelected',
+    'click .close': 'onClose'
   },
   ui:{
     checkItem: '.taskcheck',
@@ -17,6 +18,9 @@ Mapp.TaskItem = Marionette.View.extend({
     var taskStatus = this.model.get('done');
     this.ui.checkItem.prop('checked', taskStatus);
     taskStatus ? this.ui.taskitem.addClass('task-done'): this.ui.taskitem.removeClass('task-done');
+  },
+  onClose:function(){
+    this.model.destroy();
   },
   taskSelected: function(){
     var status = this.model.get('done');

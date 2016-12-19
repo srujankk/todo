@@ -54,4 +54,21 @@ router.put('/:id', function(req, res, next) {
     });
 });
 
+router.delete('/:id', function(req,res,next){
+    MongoClient.connect('mongodb://localhost:27017/todo',function(err,db){
+        if(err){
+            return next(err);
+        }
+        var tasks = db.collection('tasks');
+        console.log(req.params.id);
+        tasks.deleteOne({_id:new mongodb.ObjectID(req.params.id)},function(err,result){
+            if(err){
+                return next(err);
+            }
+            //console.log(result);
+            res.send(result);
+        })
+    });
+})
+
 module.exports = router;

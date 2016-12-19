@@ -45,6 +45,11 @@
     <script type="text/template" id="taskItemTemplate">
         <input type="checkbox" class="taskcheck"></input>
         <span class="taskitem"><%=task%></span>
+        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </script>
+
+    <script type="text/template" id="emptyTaskList">
+        <h2 class="lead">No tasks to display</h2>
     </script>
 
     <script type="text/template" id="filterTemplate">
