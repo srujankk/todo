@@ -8,3 +8,5 @@ This uses basic script tags to load the library files and templates. I have inte
 + This App displays basic routing using Backbone Router.
 + Uses only script tags to load external libraries and templates for marionette views.
 + Does not use any Regions.
++ Updated GET, POST, PUT and DELETE calls to the express app
++ updated collection fetch, model save, model destroy in backbone collection and model
