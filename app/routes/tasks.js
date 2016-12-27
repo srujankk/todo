@@ -30,9 +30,9 @@ router.post('/', function(req, res, next) {
             return next(err);
         }
         var tasks = db.collection('tasks');
-        tasks.insertOne(c,function(err,results){
+        tasks.insert(c,function(err,results){
             //console.log(results);
-            res.json(results);
+            res.json(results.ops[0]);
         })
     });
 });
