@@ -1,4 +1,6 @@
 var Mapp = {};
+Mapp.KlimateApp = {};
+
 Mapp.Router = Backbone.Router.extend({
   routes:{
     '':'home',

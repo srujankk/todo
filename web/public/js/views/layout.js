@@ -21,7 +21,7 @@ Mapp.Layout = Marionette.View.extend({
   },
   showKlimate: function(){
     console.log('displaying climate');
-    var klimate = new Mapp.Klimate();
+    var klimate = new Mapp.KlimateApp.KlimateApp();
     this.getRegion('appContainer').show(klimate);
   }
 });
