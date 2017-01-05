@@ -23,6 +23,23 @@
     <script src="js/libs/backbone.marionette.js"></script>
     <script src="js/libs/bootstrap.js"></script>
     <!-- Templates -->
+    <script type="text/template" id="layoutTemplate">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+              <li><a href="#tasks">TODO</a></li>
+              <li><a href="#klimate">Klimate</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
+      <section id='appContainer'></section>
+
+    </script>
     <script type="text/template" id="homeTemplate">
         <h1>Home</h1>
         <section class="home-content"><%= content %></section>
@@ -55,8 +72,15 @@
     <script type="text/template" id="filterTemplate">
       <input type="radio" name="options" id="option1" autocomplete="off" checked> <%=filterTitle%>
     </script>
+
+  <script type="text/template" id="klimateTemplate">
+    <h1>Klimate</h1>
+    <section id="addCity"></section>
+  </script>
+
     <!-- Application files -->
     <script src="js/app.js"></script>
+    <script src="js/views/layout.js"></script>
     <script src="js/views/home/home.js"></script>
     <script src="js/views/tasks/addtask.js"></script>
     <script src="js/models/tasks.js"></script>
@@ -66,6 +90,7 @@
     <script src="js/views/tasks/tasks.js"></script>
     <script src="js/views/tasks/filterItem.js"></script>
     <script src="js/views/tasks/filterTask.js"></script>
+    <script src="js/views/klimate/klimate.js"></script>
     <script src="js/main.js"></script>
 </body>
 
